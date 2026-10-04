@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Color Studio — Picker, Palette Generator, Gradient Maker, WCAG Contrast Checker | Universe Invedors</title>
+<meta name="description" content="Free online color tools. Pick colors, generate harmonious palettes (complementary, analogous, triadic), create CSS gradients, check WCAG contrast ratios. Export as CSS/SCSS."/>
+<meta name="keywords" content="color picker online,palette generator,gradient maker,WCAG contrast checker,color palette,hex to rgb converter,free color tool"/>
+<link rel="canonical" href="https://color.universeinvedors.tech/"/>
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large"/>
+<meta name="author" content="Universe Invedors"/>
+<meta property="og:title" content="Color Studio — Picker, Palette, Gradient, Contrast"/><meta property="og:url" content="https://color.universeinvedors.tech/"/><meta property="og:type" content="website"/><meta property="og:image" content="https://universeinvedors.tech/og-image.jpg"/><meta property="og:site_name" content="Universe Invedors Tools"/>
+<meta name="twitter:card" content="summary_large_image"/><meta name="twitter:image" content="https://universeinvedors.tech/og-image.jpg"/>
+<link rel="sitemap" type="application/xml" href="/sitemap.xml"/><link rel="icon" href="https://universeinvedors.tech/favicon.ico" sizes="any"/>
+<meta name="theme-color" content="#090c13"/>
+<meta name="google-adsense-account" content="ca-pub-8759032363251002"/>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8759032363251002" crossorigin="anonymous"></script>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Color Studio","url":"https://color.universeinvedors.tech","applicationCategory":"DesignApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Universe Invedors","url":"https://universeinvedors.tech"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Universe Invedors","item":"https://universeinvedors.tech"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://universeinvedors.tech/tools"},{"@type":"ListItem","position":3,"name":"Color Studio","item":"https://color.universeinvedors.tech"}]}]</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#090c13;--surf:#0d1117;--elev:#141b28;--card:#1a2235;--inp:#111827;--t1:#f0f4ff;--t2:#a8b5cc;--t3:#64748b;--t4:#3d4f6e;--acc:#ec4899;--acc-h:#f472b6;--acc-glow:rgba(236,72,153,.22);--green:#10b981;--blue:#3b82f6;--border:rgba(255,255,255,.07);--bh:rgba(255,255,255,.13);--font:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;--mono:'JetBrains Mono',Consolas,monospace;--r:8px;--th:50px;--tr:160ms cubic-bezier(.4,0,.2,1)}
+html{font-size:16px}body{font-family:var(--font);background:var(--bg);color:var(--t1);min-height:100dvh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:3px}
+.topbar{height:var(--th);background:rgba(9,12,19,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.5rem;padding:0 .75rem;flex-shrink:0;position:sticky;top:0;z-index:200}
+.logo{font-size:.82rem;font-weight:700;color:var(--t1);text-decoration:none;white-space:nowrap;display:flex;align-items:center;gap:.4rem}.logo:hover{color:var(--acc-h);text-decoration:none}
+.etabs{display:flex;gap:.1rem;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:var(--r);padding:3px;overflow-x:auto;flex-shrink:1}
+.et{padding:.26rem .65rem;border-radius:6px;font-size:.72rem;font-weight:600;cursor:pointer;border:none;background:transparent;color:var(--t3);white-space:nowrap;transition:all var(--tr)}.et:hover{background:rgba(255,255,255,.06);color:var(--t2)}.et.active{background:var(--acc);color:#fff;box-shadow:0 0 10px var(--acc-glow)}
+.sp{flex:1}
+.btn{display:inline-flex;align-items:center;gap:.35rem;padding:.32rem .75rem;border-radius:var(--r);font-size:.73rem;font-weight:600;cursor:pointer;border:none;transition:all var(--tr);white-space:nowrap}
+.bg{background:rgba(255,255,255,.05);color:var(--t2);border:1px solid var(--border)}.bg:hover{background:rgba(255,255,255,.09);border-color:var(--bh);color:var(--t1)}
+.bp{background:var(--acc);color:#fff}.bp:hover{background:var(--acc-h)}
+.bsm{padding:.22rem .55rem;font-size:.68rem}
+.container{max-width:860px;margin:0 auto;padding:1.25rem 1rem;flex:1;width:100%}
+.panel{display:none}.panel.active{display:block}
+.card{background:var(--surf);border:1px solid var(--border);border-radius:14px;padding:1.25rem;margin-bottom:1.25rem}
+.card-title{font-size:.95rem;font-weight:700;margin-bottom:.35rem}
+.card-sub{font-size:.78rem;color:var(--t2);margin-bottom:1rem;line-height:1.5}
+.fl{font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--t3);margin-bottom:.3rem;display:block}
+.fi{width:100%;padding:.5rem .75rem;background:var(--inp);border:1px solid var(--border);border-radius:var(--r);color:var(--t1);font-size:.88rem;outline:none;margin-bottom:.65rem;transition:border-color var(--tr);font-family:var(--mono)}
+.fi:focus{border-color:rgba(236,72,153,.45)}
+/* Color preview swatch */
+.color-preview{width:100%;height:120px;border-radius:var(--r);border:1px solid var(--border);margin-bottom:.65rem;cursor:pointer}
+.color-info-row{display:flex;gap:.65rem;flex-wrap:wrap;margin-bottom:.65rem}
+.color-info-row .field{flex:1;min-width:100px}
+.copy-chip{display:inline-flex;align-items:center;gap:.35rem;padding:.3rem .6rem;background:var(--card);border:1px solid var(--border);border-radius:6px;font-size:.72rem;font-family:var(--mono);color:var(--t2);cursor:pointer;transition:all var(--tr)}
+.copy-chip:hover{border-color:var(--acc);color:var(--t1)}
+.copy-chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.65rem}
+/* Palette */
+.palette-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:.5rem;margin-bottom:.65rem}
+.swatch{border-radius:var(--r);overflow:hidden;cursor:pointer;border:1px solid var(--border);transition:all var(--tr)}
+.swatch:hover{transform:translateY(-2px);border-color:var(--bh)}
+.swatch-color{height:80px;width:100%}
+.swatch-hex{padding:.35rem .5rem;font-size:.7rem;font-family:var(--mono);color:var(--t2);text-align:center;background:var(--card)}
+/* Gradient */
+.gradient-preview{width:100%;height:140px;border-radius:var(--r);border:1px solid var(--border);margin-bottom:.65rem}
+/* Contrast */
+.contrast-display{padding:1.5rem;border-radius:var(--r);margin-bottom:.65rem;font-size:1.2rem;font-weight:700;text-align:center}
+.contrast-ratio{font-size:2rem;font-weight:800;text-align:center;margin:.5rem 0}
+.contrast-pass{color:var(--green)}.contrast-fail{color:#f87171}
+.seo-footer{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.3rem .75rem;padding:.35rem .75rem;border-top:1px solid var(--border);background:var(--surf);font-size:.65rem;color:var(--t3)}
+.seo-footer a{color:var(--t3)}.seo-footer a:hover{color:var(--t2);text-decoration:none}.sf-links{display:flex;flex-wrap:wrap;gap:.2rem .6rem}
+.toasts{position:fixed;bottom:2.5rem;right:1rem;z-index:999;display:flex;flex-direction:column;gap:.4rem;pointer-events:none}
+.toast{padding:.5rem .85rem;border-radius:var(--r);font-size:.75rem;font-weight:600;background:var(--card);border:1px solid var(--border);color:var(--t1);box-shadow:0 6px 24px rgba(0,0,0,.5);animation:tin .2s ease}
+.toast.ok{border-color:rgba(16,185,129,.35);color:var(--green)}.toast.err{border-color:rgba(239,68,68,.35);color:#f87171}.toast.info{border-color:rgba(236,72,153,.35);color:var(--acc-h)}
+@keyframes tin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a href="https://universeinvedors.tech/tools" class="logo">🎨 <span style="color:var(--acc-h)">Color Studio</span></a>
+  <div class="etabs">
+    <button class="et active" id="et-picker"   onclick="setPanel('picker')">🎨 Picker</button>
+    <button class="et" id="et-palette"  onclick="setPanel('palette')">📐 Palette</button>
+    <button class="et" id="et-gradient" onclick="setPanel('gradient')">🌈 Gradient</button>
+    <button class="et" id="et-contrast" onclick="setPanel('contrast')">✓ Contrast</button>
+  </div>
+  <div class="sp"></div>
+  <span style="font-size:.67rem;color:var(--t4)">Free · No sign-up</span>
+</header>
+<div class="container">
+  <!-- PICKER -->
+  <div id="panel-picker" class="panel active">
+    <div class="card">
+      <div class="card-title">🎨 Color Picker</div>
+      <div class="card-sub">Pick any color and get it in HEX, RGB, HSL, HSV and CMYK. Click the preview to open the browser color picker.</div>
+      <input type="color" id="picker-input" value="#3b82f6" oninput="updatePicker()" style="width:100%;height:80px;border-radius:var(--r);border:1px solid var(--border);cursor:pointer;padding:.15rem;background:transparent">
+      <div class="color-preview" id="picker-preview" style="background:#3b82f6;margin-top:.65rem" onclick="document.getElementById('picker-input').click()"></div>
+      <div class="copy-chips" id="picker-chips"></div>
+      <div class="card-title" style="font-size:.82rem;margin-top:.85rem">CSS Output</div>
+      <pre id="picker-css" style="background:var(--inp);border:1px solid var(--border);border-radius:var(--r);padding:.75rem;font-family:var(--mono);font-size:.78rem;color:var(--t2);overflow-x:auto;white-space:pre-wrap"></pre>
+      <button class="btn bp bsm" style="margin-top:.5rem" onclick="copyCSS()">📋 Copy CSS</button>
+    </div>
+  </div>
+  <!-- PALETTE -->
+  <div id="panel-palette" class="panel">
+    <div class="card">
+      <div class="card-title">📐 Palette Generator</div>
+      <div class="card-sub">Generate harmonious color palettes from any base color. Click a swatch to copy its HEX.</div>
+      <div style="display:flex;gap:.65rem;align-items:flex-end;margin-bottom:1rem;flex-wrap:wrap">
+        <div><label class="fl">Base color</label><input type="color" id="palette-base" value="#8b5cf6" oninput="generatePalette()" style="width:60px;height:38px;border-radius:var(--r);border:1px solid var(--border);padding:.15rem;background:transparent;cursor:pointer"></div>
+        <div style="flex:1;min-width:140px">
+          <label class="fl">Harmony type</label>
+          <select id="palette-type" onchange="generatePalette()" style="width:100%;padding:.42rem .65rem;background:var(--inp);border:1px solid var(--border);border-radius:var(--r);color:var(--t1);font-size:.82rem;outline:none">
+            <option value="complementary">Complementary</option><option value="analogous">Analogous</option><option value="triadic">Triadic</option><option value="tetradic">Tetradic (Square)</option><option value="split">Split Complementary</option><option value="monochrome">Monochromatic</option>
+          </select>
+        </div>
+        <button class="btn bg bsm" onclick="randomPalette()">🎲 Random</button>
+      </div>
+      <div class="palette-grid" id="palette-grid"></div>
+      <div style="margin-top:.65rem">
+        <button class="btn bg bsm" onclick="exportPaletteCSS()">📋 Copy CSS Vars</button>
+        <button class="btn bg bsm" onclick="exportPaletteSCSS()">📋 Copy SCSS</button>
+      </div>
+    </div>
+  </div>
+  <!-- GRADIENT -->
+  <div id="panel-gradient" class="panel">
+    <div class="card">
+      <div class="card-title">🌈 Gradient Maker</div>
+      <div class="card-sub">Create beautiful CSS gradients and copy the code.</div>
+      <div class="gradient-preview" id="gradient-preview" style="background:linear-gradient(135deg,#3b82f6,#8b5cf6)"></div>
+      <div style="display:flex;gap:.65rem;align-items:center;margin-bottom:.65rem;flex-wrap:wrap">
+        <div><label class="fl">Color 1</label><input type="color" id="grad-c1" value="#3b82f6" oninput="updateGradient()" style="width:50px;height:36px;border-radius:6px;border:1px solid var(--border);padding:.15rem;background:transparent;cursor:pointer"></div>
+        <div><label class="fl">Color 2</label><input type="color" id="grad-c2" value="#8b5cf6" oninput="updateGradient()" style="width:50px;height:36px;border-radius:6px;border:1px solid var(--border);padding:.15rem;background:transparent;cursor:pointer"></div>
+        <div><label class="fl">Color 3 (optional)</label><input type="color" id="grad-c3" value="#000000" oninput="updateGradient()" style="width:50px;height:36px;border-radius:6px;border:1px solid var(--border);padding:.15rem;background:transparent;cursor:pointer"></div>
+        <div style="flex:1;min-width:100px">
+          <label class="fl">Angle</label><input type="range" id="grad-angle" min="0" max="360" value="135" oninput="updateGradient()" style="width:100%;accent-color:var(--acc)"><span id="grad-angle-label" style="font-size:.7rem;color:var(--t3)">135°</span>
+        </div>
+        <div>
+          <label class="fl">Type</label>
+          <select id="grad-type" onchange="updateGradient()" style="padding:.38rem .55rem;background:var(--inp);border:1px solid var(--border);border-radius:var(--r);color:var(--t1);font-size:.78rem;outline:none">
+            <option value="linear">Linear</option><option value="radial">Radial</option>
+          </select>
+        </div>
+      </div>
+      <pre id="gradient-css" style="background:var(--inp);border:1px solid var(--border);border-radius:var(--r);padding:.75rem;font-family:var(--mono);font-size:.78rem;color:var(--t2);overflow-x:auto;white-space:pre-wrap"></pre>
+      <button class="btn bp bsm" style="margin-top:.5rem" onclick="copyGradient()">📋 Copy CSS</button>
+    </div>
+  </div>
+  <!-- CONTRAST -->
+  <div id="panel-contrast" class="panel">
+    <div class="card">
+      <div class="card-title">✓ WCAG Contrast Checker</div>
+      <div class="card-sub">Check color contrast for accessibility (WCAG 2.1 AA/AAA compliance).</div>
+      <div style="display:flex;gap:.65rem;align-items:center;margin-bottom:1rem;flex-wrap:wrap">
+        <div><label class="fl">Text color</label><input type="color" id="contrast-fg" value="#ffffff" oninput="checkContrast()" style="width:60px;height:38px;border-radius:var(--r);border:1px solid var(--border);padding:.15rem;background:transparent;cursor:pointer"></div>
+        <div><label class="fl">Background color</label><input type="color" id="contrast-bg" value="#3b82f6" oninput="checkContrast()" style="width:60px;height:38px;border-radius:var(--r);border:1px solid var(--border);padding:.15rem;background:transparent;cursor:pointer"></div>
+      </div>
+      <div class="contrast-display" id="contrast-preview" style="background:#3b82f6;color:#fff">The quick brown fox jumps over the lazy dog</div>
+      <div class="contrast-ratio" id="contrast-ratio">4.60:1</div>
+      <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem">
+        <div id="contrast-aa-normal" class="contrast-pass" style="font-size:.8rem">✓ AA Normal</div>
+        <div id="contrast-aaa-normal" style="font-size:.8rem;color:#f87171">✗ AAA Normal</div>
+        <div id="contrast-aa-large" class="contrast-pass" style="font-size:.8rem">✓ AA Large</div>
+        <div id="contrast-aaa-large" class="contrast-pass" style="font-size:.8rem">✓ AAA Large</div>
+      </div>
+      <p style="font-size:.75rem;color:var(--t2);margin-top:.65rem">WCAG AA requires 4.5:1 for normal text, 3:1 for large text. AAA requires 7:1 and 4.5:1.</p>
+    </div>
+  </div>
+</div>
+<footer class="seo-footer">
+  <div class="sf-links">
+    <a href="https://universeinvedors.tech">Universe Invedors</a><a href="https://universeinvedors.tech/tools">All Tools</a>
+    <a href="https://calc.universeinvedors.tech">Calculators</a><a href="https://json.universeinvedors.tech">JSON</a>
+    <a href="https://qr.universeinvedors.tech">QR Code</a><a href="https://text.universeinvedors.tech">Text</a>
+    <a href="https://code.universeinvedors.tech">Code</a><a href="https://diagram.universeinvedors.tech">Diagrams</a>
+    <a href="https://chart.universeinvedors.tech">Charts</a><a href="https://ocr.universeinvedors.tech">OCR</a>
+    <a href="https://pdf.universeinvedors.tech">PDF</a><a href="https://image.universeinvedors.tech">Image</a>
+    <a href="https://3d.universeinvedors.tech">3D</a><a href="https://map.universeinvedors.tech">Maps</a><a href="https://media.universeinvedors.tech">Media</a>
+  </div>
+  <span>© 2024 Universe Invedors · Color Studio · Free Design Tool</span>
+</footer>
+<div class="toasts" id="toasts"></div>
+<script>
+function setPanel(name){
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active')})
+  document.querySelectorAll('.et').forEach(function(t){t.classList.remove('active')})
+  document.getElementById('panel-'+name).classList.add('active')
+  document.getElementById('et-'+name).classList.add('active')
+}
+function hexToRgb(hex){hex=hex.replace('#','');var r=parseInt(hex.slice(0,2),16),g=parseInt(hex.slice(2,4),16),b=parseInt(hex.slice(4,6),16);return{r:r,g:g,b:b}}
+function rgbToHex(r,g,b){return'#'+[r,g,b].map(function(x){return Math.round(x).toString(16).padStart(2,'0')}).join('')}
+function rgbToHsl(r,g,b){r/=255;g/=255;b/=255;var max=Math.max(r,g,b),min=Math.min(r,g,b),h,s,l=(max+min)/2;if(max===min){h=s=0}else{var d=max-min;s=l>.5?d/(2-max-min):d/(max+min);switch(max){case r:h=(g-b)/d+(g<b?6:0);break;case g:h=(b-r)/d+2;break;case b:h=(r-g)/d+4;break}h/=6}return{h:Math.round(h*360),s:Math.round(s*100),l:Math.round(l*100)}}
+function hslToRgb(h,s,l){h/=360;s/=100;l/=100;var r,g,b;if(s===0){r=g=b=l}else{var hue2rgb=function(p,q,t){if(t<0)t+=1;if(t>1)t-=1;if(t<1/6)return p+(q-p)*6*t;if(t<1/2)return q;if(t<2/3)return p+(q-p)*(2/3-t)*6;return p};var q=l<.5?l*(1+s):l+s-l*s,p=2*l-q;r=hue2rgb(p,q,h+1/3);g=hue2rgb(p,q,h);b=hue2rgb(p,q,h-1/3)}return{r:Math.round(r*255),g:Math.round(g*255),b:Math.round(b*255)}}
+function luminance(r,g,b){var a=[r,g,b].map(function(v){v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return.2126*a[0]+.7152*a[1]+.0722*a[2]}
+function contrastRatio(fg,bg){var l1=luminance(fg.r,fg.g,fg.b),l2=luminance(bg.r,bg.g,bg.b);return(Math.max(l1,l2)+.05)/(Math.min(l1,l2)+.05)}
+
+function updatePicker(){
+  var hex=document.getElementById('picker-input').value
+  var rgb=hexToRgb(hex),hsl=rgbToHsl(rgb.r,rgb.g,rgb.b)
+  document.getElementById('picker-preview').style.background=hex
+  var chips=[
+    {label:'HEX',val:hex},
+    {label:'RGB',val:'rgb('+rgb.r+', '+rgb.g+', '+rgb.b+')'},
+    {label:'HSL',val:'hsl('+hsl.h+', '+hsl.s+'%, '+hsl.l+'%)'},
+    {label:'HSV',val:'hsv('+hsl.h+', '+hsl.s+'%, '+Math.round(Math.max(rgb.r,rgb.g,rgb.b)/255*100)+'%)'},
+  ]
+  document.getElementById('picker-chips').innerHTML=chips.map(function(c){
+    return'<div class="copy-chip" onclick="copyText(\''+c.val+'\')">'+c.label+': <span style="color:var(--t1)">'+c.val+'</span></div>'
+  }).join('')
+  document.getElementById('picker-css').textContent='/* '+hex+' */\n.color {\n  background-color: '+hex+';\n  /* rgb('+rgb.r+', '+rgb.g+', '+rgb.b+') */\n  /* hsl('+hsl.h+', '+hsl.s+'%, '+hsl.l+'%) */\n}'
+}
+function copyCSS(){var text=document.getElementById('picker-css').textContent;navigator.clipboard.writeText(text).then(function(){toast('CSS copied','ok')})}
+function copyText(t){navigator.clipboard.writeText(t).then(function(){toast(t+' copied','ok')})}
+
+function generatePalette(){
+  var base=document.getElementById('palette-base').value,type=document.getElementById('palette-type').value
+  var rgb=hexToRgb(base),hsl=rgbToHsl(rgb.r,rgb.g,rgb.b)
+  var colors=[]
+  if(type==='complementary'){colors=[base,hslToHex((hsl.h+180)%360,hsl.s,hsl.l)]}
+  else if(type==='analogous'){for(var i=-2;i<=2;i++)colors.push(hslToHex((hsl.h+i*30+360)%360,hsl.s,hsl.l))}
+  else if(type==='triadic'){colors=[base,hslToHex((hsl.h+120)%360,hsl.s,hsl.l),hslToHex((hsl.h+240)%360,hsl.s,hsl.l)]}
+  else if(type==='tetradic'){colors=[base,hslToHex((hsl.h+90)%360,hsl.s,hsl.l),hslToHex((hsl.h+180)%360,hsl.s,hsl.l),hslToHex((hsl.h+270)%360,hsl.s,hsl.l)]}
+  else if(type==='split'){colors=[base,hslToHex((hsl.h+150)%360,hsl.s,hsl.l),hslToHex((hsl.h+210)%360,hsl.s,hsl.l)]}
+  else if(type==='monochrome'){for(var i=0;i<5;i++)colors.push(hslToHex(hsl.h,hsl.s,Math.max(10,Math.min(90,hsl.l+(i-2)*18))))}
+  document.getElementById('palette-grid').innerHTML=colors.map(function(c){
+    return'<div class="swatch" onclick="copyText(\''+c+'\')"><div class="swatch-color" style="background:'+c+'"></div><div class="swatch-hex">'+c+'</div></div>'
+  }).join('')
+}
+function hslToHex(h,s,l){var rgb=hslToRgb(h,s,l);return rgbToHex(rgb.r,rgb.g,rgb.b)}
+function randomPalette(){document.getElementById('palette-base').value='#'+Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');generatePalette();toast('Random palette','ok')}
+function exportPaletteCSS(){
+  var swatches=document.querySelectorAll('.swatch-hex'),vars=[]
+  swatches.forEach(function(s,i){vars.push('--color-'+(i+1)+': '+s.textContent+';')})
+  navigator.clipboard.writeText(':root {\n  '+vars.join('\n  ')+'\n}').then(function(){toast('CSS vars copied','ok')})
+}
+function exportPaletteSCSS(){
+  var swatches=document.querySelectorAll('.swatch-hex'),vars=[]
+  swatches.forEach(function(s,i){vars.push('$color-'+(i+1)+': '+s.textContent+';')})
+  navigator.clipboard.writeText(vars.join('\n')).then(function(){toast('SCSS copied','ok')})
+}
+
+function updateGradient(){
+  var c1=document.getElementById('grad-c1').value,c2=document.getElementById('grad-c2').value
+  var c3=document.getElementById('grad-c3').value,angle=document.getElementById('grad-angle').value
+  var type=document.getElementById('grad-type').value
+  document.getElementById('grad-angle-label').textContent=angle+'°'
+  var use3=c3!=='#000000'||(c1===c2&&c3!=='#000000')
+  var colors=use3?[c1,c2,c3]:[c1,c2]
+  var css=type==='linear'?'linear-gradient('+angle+'deg, '+colors.join(', ')+')':'radial-gradient(circle, '+colors.join(', ')+')'
+  document.getElementById('gradient-preview').style.background=css
+  document.getElementById('gradient-css').textContent='background: '+css+';'
+}
+function copyGradient(){var text=document.getElementById('gradient-css').textContent;navigator.clipboard.writeText(text).then(function(){toast('Gradient CSS copied','ok')})}
+
+function checkContrast(){
+  var fg=document.getElementById('contrast-fg').value,bg=document.getElementById('contrast-bg').value
+  var fgRgb=hexToRgb(fg),bgRgb=hexToRgb(bg)
+  var ratio=contrastRatio(fgRgb,bgRgb)
+  document.getElementById('contrast-preview').style.color=fg
+  document.getElementById('contrast-preview').style.background=bg
+  document.getElementById('contrast-ratio').textContent=ratio.toFixed(2)+':1'
+  var checks=[
+    {id:'contrast-aa-normal',pass:ratio>=4.5},
+    {id:'contrast-aaa-normal',pass:ratio>=7},
+    {id:'contrast-aa-large',pass:ratio>=3},
+    {id:'contrast-aaa-large',pass:ratio>=4.5},
+  ]
+  checks.forEach(function(c){
+    var el=document.getElementById(c.id)
+    if(c.pass){el.className='contrast-pass';el.innerHTML=el.innerHTML.replace('✗','✓')}
+    else{el.className='contrast-fail';el.innerHTML=el.innerHTML.replace('✓','✗')}
+  })
+}
+
+// Init all
+updatePicker();generatePalette();updateGradient();checkContrast()
+
+function toast(msg,type){var e=document.createElement('div');e.className='toast'+(type?' '+type:'');e.textContent=msg;document.getElementById('toasts').appendChild(e);setTimeout(function(){e.remove()},2800)}
+</script>
+</body>
+</html>
