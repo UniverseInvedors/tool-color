@@ -11,6 +11,7 @@
 <meta property="og:title" content="Color Studio — Picker, Palette, Gradient, Contrast"/><meta property="og:url" content="https://color.universeinvedors.tech/"/><meta property="og:type" content="website"/><meta property="og:image" content="https://universeinvedors.tech/og-image.jpg"/><meta property="og:site_name" content="Universe Invedors Tools"/>
 <meta name="twitter:card" content="summary_large_image"/><meta name="twitter:image" content="https://universeinvedors.tech/og-image.jpg"/>
 <link rel="sitemap" type="application/xml" href="/sitemap.xml"/><link rel="icon" href="https://universeinvedors.tech/favicon.ico" sizes="any"/>
+<link rel="manifest" href="/manifest.json"/>
 <meta name="theme-color" content="#090c13"/>
 <meta name="google-adsense-account" content="ca-pub-8759032363251002"/>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8759032363251002" crossorigin="anonymous"></script>
@@ -150,8 +151,11 @@ input[type=range]{accent-color:var(--accent);width:100%}
       </div>
       <div class="palette-grid" id="palette-grid"></div>
       <div style="margin-top:.65rem">
-        <button class="btn bg bsm" onclick="exportPaletteCSS()">📋 Copy CSS Vars</button>
-        <button class="btn bg bsm" onclick="exportPaletteSCSS()">📋 Copy SCSS</button>
+        <button class="btn bg bsm" onclick="exportPaletteCSS()">Copy CSS Vars</button>
+        <button class="btn bg bsm" onclick="exportPaletteSCSS()">Copy SCSS</button>
+        <button class="btn bg bsm" onclick="exportPaletteTailwind()">Copy Tailwind</button>
+        <button class="btn bg bsm" onclick="savePalette()">Save palette</button>
+        <button class="btn bg bsm" onclick="sendPaletteToCode()">Use in Code IDE</button>
       </div>
     </div>
   </div>
@@ -220,7 +224,7 @@ function setPanel(name){
   document.getElementById('panel-'+name).classList.add('active')
   document.getElementById('et-'+name).classList.add('active')
 }
-function hexToRgb(hex){hex=hex.replace('#','');var r=parseInt(hex.slice(0,2),16),g=parseInt(hex.slice(2,4),16),b=parseInt(hex.slice(4,6),16);return{r:r,g:g,b:b}}
+function hexToRgb(hex){hex=(hex||'#000000').replace(/[^a-fA-F0-9]/g,'');if(hex.length===3)hex=hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];if(hex.length!==6)return{r:0,g:0,b:0};var r=parseInt(hex.slice(0,2),16),g=parseInt(hex.slice(2,4),16),b=parseInt(hex.slice(4,6),16);return{r:isNaN(r)?0:r,g:isNaN(g)?0:g,b:isNaN(b)?0:b}}
 function rgbToHex(r,g,b){return'#'+[r,g,b].map(function(x){return Math.round(x).toString(16).padStart(2,'0')}).join('')}
 function rgbToHsl(r,g,b){r/=255;g/=255;b/=255;var max=Math.max(r,g,b),min=Math.min(r,g,b),h,s,l=(max+min)/2;if(max===min){h=s=0}else{var d=max-min;s=l>.5?d/(2-max-min):d/(max+min);switch(max){case r:h=(g-b)/d+(g<b?6:0);break;case g:h=(b-r)/d+2;break;case b:h=(r-g)/d+4;break}h/=6}return{h:Math.round(h*360),s:Math.round(s*100),l:Math.round(l*100)}}
 function hslToRgb(h,s,l){h/=360;s/=100;l/=100;var r,g,b;if(s===0){r=g=b=l}else{var hue2rgb=function(p,q,t){if(t<0)t+=1;if(t>1)t-=1;if(t<1/6)return p+(q-p)*6*t;if(t<1/2)return q;if(t<2/3)return p+(q-p)*(2/3-t)*6;return p};var q=l<.5?l*(1+s):l+s-l*s,p=2*l-q;r=hue2rgb(p,q,h+1/3);g=hue2rgb(p,q,h);b=hue2rgb(p,q,h-1/3)}return{r:Math.round(r*255),g:Math.round(g*255),b:Math.round(b*255)}}
@@ -263,16 +267,68 @@ function hslToHex(h,s,l){var rgb=hslToRgb(h,s,l);return rgbToHex(rgb.r,rgb.g,rgb
 function randomPalette(){document.getElementById('palette-base').value='#'+Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');generatePalette();toast('Random palette','ok')}
 function exportPaletteCSS(){
   var swatches=document.querySelectorAll('.swatch-hex'),vars=[]
-  swatches.forEach(function(s,i){vars.push('--color-'+(i+1)+': '+s.textContent+';')})
-  navigator.clipboard.writeText(':root {\n  '+vars.join('\n  ')+'\n}').then(function(){toast('CSS vars copied','ok')})
+  swatches.forEach(function(s,i){vars.push('  --color-'+(i+1)+': '+s.textContent+';')})
+  navigator.clipboard.writeText(':root {\n'+vars.join('\n')+'\n}').then(function(){toast('CSS variables copied','ok')})
 }
 function exportPaletteSCSS(){
   var swatches=document.querySelectorAll('.swatch-hex'),vars=[]
   swatches.forEach(function(s,i){vars.push('$color-'+(i+1)+': '+s.textContent+';')})
-  navigator.clipboard.writeText(vars.join('\n')).then(function(){toast('SCSS copied','ok')})
+  navigator.clipboard.writeText(vars.join('\n')).then(function(){toast('SCSS variables copied','ok')})
+}
+function exportPaletteTailwind(){
+  var swatches=document.querySelectorAll('.swatch-hex'),vars={}
+  swatches.forEach(function(s,i){vars['color-'+(i+1)]=s.textContent})
+  var code='// tailwind.config.js\nmodule.exports = {\n  theme: {\n    extend: {\n      colors: {\n'+
+    Object.entries(vars).map(function(e){return"        '"+e[0]+"': '"+e[1]+"',"}).join('\n')+
+    '\n      }\n    }\n  }\n}'
+  navigator.clipboard.writeText(code).then(function(){toast('Tailwind config copied','ok')})
 }
 
-function updateGradient(){
+// Save/load palette history with localStorage
+function savePalette(){
+  var swatches=document.querySelectorAll('.swatch-hex')
+  if(!swatches.length){toast('Generate a palette first','err');return}
+  var colors=Array.from(swatches).map(function(s){return s.textContent})
+  var history=JSON.parse(localStorage.getItem('ui_palettes')||'[]')
+  history.unshift({colors:colors,base:document.getElementById('palette-base').value,type:document.getElementById('palette-type').value,date:new Date().toLocaleDateString()})
+  if(history.length>12)history.pop()
+  localStorage.setItem('ui_palettes',JSON.stringify(history))
+  renderPaletteHistory()
+  toast('Palette saved','ok')
+}
+function renderPaletteHistory(){
+  var history=JSON.parse(localStorage.getItem('ui_palettes')||'[]')
+  var el=document.getElementById('palette-history')
+  if(!el)return
+  if(!history.length){el.innerHTML='<span style="font-size:.75rem;color:var(--text-3)">No saved palettes yet.</span>';return}
+  el.innerHTML=history.map(function(p,i){
+    var swatches=p.colors.map(function(c){return'<span style="display:inline-block;width:20px;height:20px;background:'+c+';border-radius:4px;border:1px solid rgba(255,255,255,.1)" title="'+c+'"></span>'}).join('')
+    return'<div style="display:flex;align-items:center;gap:.5rem;padding:.4rem 0;border-bottom:1px solid var(--border)">'+
+      '<div style="display:flex;gap:.2rem">'+swatches+'</div>'+
+      '<span style="font-size:.72rem;color:var(--text-3)">'+p.type+' · '+p.date+'</span>'+
+      '<button onclick="loadSavedPalette('+i+')" style="margin-left:auto;background:none;border:none;color:var(--accent-light);font-size:.72rem;cursor:pointer">Load</button>'+
+      '<button onclick="deleteSavedPalette('+i+')" style="background:none;border:none;color:#f87171;font-size:.72rem;cursor:pointer">×</button>'+
+      '</div>'
+  }).join('')
+}
+function loadSavedPalette(i){
+  var history=JSON.parse(localStorage.getItem('ui_palettes')||'[]')
+  var p=history[i];if(!p)return
+  document.getElementById('palette-base').value=p.base
+  document.getElementById('palette-type').value=p.type
+  generatePalette()
+  toast('Palette loaded','ok')
+}
+function deleteSavedPalette(i){
+  var history=JSON.parse(localStorage.getItem('ui_palettes')||'[]')
+  history.splice(i,1)
+  localStorage.setItem('ui_palettes',JSON.stringify(history))
+  renderPaletteHistory()
+  toast('Deleted','ok')
+}
+
+// Init all
+updatePicker();generatePalette();updateGradient();checkContrast();renderPaletteHistory()
   var c1=document.getElementById('grad-c1').value,c2=document.getElementById('grad-c2').value
   var c3=document.getElementById('grad-c3').value,angle=document.getElementById('grad-angle').value
   var type=document.getElementById('grad-type').value
@@ -308,9 +364,18 @@ function checkContrast(){
 // Init all
 updatePicker();generatePalette();updateGradient();checkContrast()
 
+
+function sendPaletteToCode(){
+  var swatches=document.querySelectorAll('.swatch-hex')
+  if(!swatches.length){toast('Generate a palette first','err');return}
+  var vars=Array.from(swatches).map(function(s,i){return'  --color-'+(i+1)+': '+s.textContent+';'})
+  var css=':root {\n'+vars.join('\n')+'\n}\n\n/* Apply your palette */\nbody { background: var(--color-1); color: var(--color-2); }'
+  localStorage.setItem('ui_code_snippet',css)
+  window.open('https://code.universeinvedors.tech?from=color','_blank')
+  toast('Opening Code IDE with your palette CSS�','ok')
+}
 function toast(msg,type){var e=document.createElement('div');e.className='toast'+(type?' '+type:'');e.textContent=msg;document.getElementById('toasts').appendChild(e);setTimeout(function(){e.remove()},2800)}
-</script>
-<script>
+</script><script>
 // GA4 Custom Events — Color Tools
 (function(){
   // Track which color tool is used
@@ -339,6 +404,9 @@ function toast(msg,type){var e=document.createElement('div');e.className='toast'
     el.addEventListener('click',function(){gaEvent('css_exported','Color Tools','gradient_css');});
   });
 })();
+</script>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(function(){})}
 </script>
 </body>
 </html>>
